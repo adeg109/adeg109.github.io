@@ -3,34 +3,34 @@
 <head>
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="content-type">
-  <title>Lab2</title>
-	<style>
+  <title>Lab3</title>
+  <style>
 .button {
-  padding: 8px 60px 8px 60px;
-  font-size: 20px;
-  font-family: "times new roman";
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: #fff;
-  background-color: rgb(0, 0, 48);
-  border: none;
-  border-radius: 15px;
-  box-shadow: none;
+padding: 8px 60px 8px 60px;
+font-size: 20px;
+font-family: "times new roman";
+text-align: center;
+cursor: pointer;
+outline: none;
+color: #fff;
+background-color: rgb(0, 0, 48);
+border: none;
+border-radius: 15px;
+box-shadow: none;
 }
-
 .button:hover {background-color: #0303a0}
-
 .button:active {
-  background-color: #0303a0;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+background-color: #0303a0;
+box-shadow: 0 5px #666;
+transform: translateY(4px);
 }
-</style>
+  </style>
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
 <table style="text-align: left; color: white; width: 100%;"
- border="0" cellpadding="2" cellspacing="2">
+ border="0" cellpadding="2" cellspacing="0">
   <tbody>
     <tr>
       <td
@@ -45,27 +45,42 @@
           <tr>
             <td>
             <table
- style="text-align: center; width: 100%; height: 158px;" border="0"
- cellpadding="5" cellspacing="0">
+ style="text-align: center; width: 100%; height: 158px;"
+ border="0" cellpadding="5" cellspacing="0">
               <tbody>
                 <tr style="font-weight: bold; color: white;">
-					
-                  <td style="height: 5%;"><a style="text-decoration: none; color: rgb(255, 255, 255);" href="../index.html"><big><button class="button">Home</button></big></a></td>
+                  <td style="height: 5%;"><a
+ style="text-decoration: none; color: rgb(255, 255, 255);"
+ href="../index.html"><big><button class="button">Home</button></big></a></td>
                 </tr>
                 <tr style="font-weight: bold;">
-                  <td style="height: 5%;"><a style="text-decoration: none; color: rgb(255, 255, 255);" href="Lab2.html"><big><button class="button">Lab 2</button></big></a></td>
+                  <td style="height: 5%;"><a
+ style="text-decoration: none; color: rgb(255, 255, 255);"
+ href="Lab2.html"><big><button class="button">Lab
+2</button></big></a></td>
                 </tr>
                 <tr style="font-weight: bold;">
-                  <td><a style="text-decoration: none; color: rgb(255, 255, 255);" href="Lab3.html"><big><button class="button">Lab 3</button></big></a></td>
+                  <td><a
+ style="text-decoration: none; color: rgb(255, 255, 255);"
+ href="Lab3.html"><big><button class="button">Lab
+3</button></big></a></td>
                 </tr>
                 <tr style="font-weight: bold;">
-                  <td><a style="text-decoration: none; color: rgb(255, 255, 255);" href="Lab4.html"><big><button class="button">Lab 4</button></big></a></td>
+                  <td><a
+ style="text-decoration: none; color: rgb(255, 255, 255);"
+ href="Lab4.html"><big><button class="button">Lab
+4</button></big></a></td>
                 </tr>
                 <tr style="font-weight: bold;">
-                  <td><a style="text-decoration: none; color: rgb(255, 255, 255);" href="Lab5.html"><big><button class="button">Lab 5</button></big></a></td>
+                  <td><a
+ style="text-decoration: none; color: rgb(255, 255, 255);"
+ href="Lab5.html"><big><button class="button">Lab
+5</button></big></a></td>
                 </tr>
                 <tr style="font-weight: bold;">
-                  <td style="height: 10%;"><a style="text-decoration: none; color: rgb(255, 255, 255);" href="Project.html"><big><button class="button">Project</button></big></a></td>
+                  <td style="height: 10%;"><a
+ style="text-decoration: none; color: rgb(255, 255, 255);"
+ href="Project.html"><big><button class="button">Project</button></big></a></td>
                 </tr>
               </tbody>
             </table>
@@ -97,19 +112,248 @@
       <td
  style="width: 511px; text-align: center; vertical-align: top;">
       <table
- style="width: 90%; height: 948px; text-align: left; margin-left: auto; margin-right: auto;"
+ style="text-align: left; margin-left: auto; margin-right: auto; height: 948px; width: 90%;"
  border="0" cellpadding="2" cellspacing="2">
         <tbody>
           <tr>
-            <td style="height: 20%;"></td>
+            <td style="height: 20%;"><span
+ style="color: black;">Page Title</span></td>
           </tr>
           <tr>
-            <td style="height: 80%;"></td>
+            <td style="height: 80%;">
+            <table
+ style="width: 1181px; height: 447px; text-align: left; margin-left: auto; margin-right: auto;"
+ border="0" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <td><span style="color: black;">Space
+1</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div id='map1' style='width: 100%; height: 900px;'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWRlZzEwOSIsImEiOiJjajZwcGU2b24wMWw2MnduejQ2cTBwbzdjIn0.5G85zcs_IL3FFqUm2BG3Dg';
+var map1 = new mapboxgl.Map({
+    container: 'map1',
+    center: [172, -40.9006],
+    zoom: 5,
+    style: 'mapbox://styles/adeg109/cj6ppxg9h2tnz2so4qgjxvqb1',
+   
+});
+</script>
+                    </td>
+                </tr>
+                <tr>
+                  <td><span style="color: black;">Space
+3</span></td>
+                </tr>
+                <tr>
+                  <td>
+                      <div id='map2' style='width: 100%; height: 900px;'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWRlZzEwOSIsImEiOiJjajZwcGU2b24wMWw2MnduejQ2cTBwbzdjIn0.5G85zcs_IL3FFqUm2BG3Dg';
+var map2 = new mapboxgl.Map({
+    container: 'map2',
+    center: [172, -40.9006],
+    zoom: 5,
+    style: 'mapbox://styles/adeg109/cj6zrdnifc6yk2smiu8l8j86r',
+   
+});
+    
+    map2.on('load', function () {
+        
+        map2.addSource("greatwalkstracks", {
+type: 'vector',
+url: 'mapbox://adeg109.cj6pq1hk201va2xnz415d7hbe-1ptcs'
+});
+		
+    map2.addSource("markers",{
+            "type": "geojson",
+            "data": {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-symbol": "triangle",
+        "title": "Tongariro Northern Circuit"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          175.61920166015625,
+          -39.210975205995275
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-symbol": "triangle",
+        "title": "Lake Waikaremoana Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          177.0072555541992,
+          -38.8199161298013
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-symbol": "triangle",
+        "title": "Abel Tasman Coast Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          173.04810047149658,
+          -40.88461016552435
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-symbol": "triangle",
+        "title": "Heaphy Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          172.298583984375,
+          -40.88529151243459
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-symbol": "triangle",
+        "title": "Routeburn Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          168.1698703765869,
+          -44.761849131252646
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-symbol": "triangle",
+        "title": "Milford Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          167.7852630615234,
+          -44.821907878813754
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-symbol": "triangle",
+        "title": "Kepler Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          167.5308609008789,
+          -45.39338724312406
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-symbol": "triangle",
+        "title": "Rakiura Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          168.05957794189453,
+          -46.873922575976984
+        ]
+      }
+    }
+  ]
+}
+ });
+    map2.addLayer({
+        "id": "tracks",
+        "type": "line",
+        "source": "greatwalkstracks",
+        "source-layer": "greatwalksplan",
+        "layout": {
+            "visibility": "visible",
+            "line-join": "round",
+            "line-cap": "round"
+        },
+        "paint": {
+            "line-color": "#1E0AF5",
+            "line-width": 1
+        }
+    });
+		map2.addLayer({
+        "id": "markers",
+        "type": "symbol",
+        "source": "markers",
+       "layout": {
+            "icon-image": "{marker-symbol}-15",
+            "text-field": "{title}",
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-offset": [0, 0.6],
+		    "text-size": 11,
+            "text-anchor": "top",
+		    "text-allow-overlap": true
+		   
+        },
+        "paint": {
+           "text-color":"#ff5e00",
+        }
+    });
+	
+	map2.setLayerZoomRange('tracks',7,0);
+    map2.setLayerZoomRange('markers', 0, 22)
+});
+	map2.on('mousemove', function (e) {
+ var features = map2.queryRenderedFeatures(e.point, { layers: ['markers'] });
+ map2.getCanvas().style.cursor = features.length ? 'pointer' : '';
+});
+	
+map2.on('click', function (e) {
+ var features = map2.queryRenderedFeatures(e.point, { layers: ['markers'] });
+ if (features.length) {
+ map2.flyTo({center: features[0].geometry.coordinates, zoom: 9});
+ }
+});
+</script>
+
+                </tr>
+                <tr>
+                  <td><span style="color: black;">Source</span></td>
+                </tr>
+              </tbody>
+            </table>
+            </td>
           </tr>
         </tbody>
       </table>
       <br>
       </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(0, 0, 48);"></td>
+      <td><span style="color: black;">name</span></td>
     </tr>
   </tbody>
 </table>
