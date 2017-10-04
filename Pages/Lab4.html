@@ -3,7 +3,11 @@
 <head>
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="content-type">
-  <title>Lab4</title>
+  <title>Lab 4</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
 <style>
 .button {
   padding: 8px 60px 8px 60px;
@@ -26,6 +30,38 @@
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+	.info {
+      padding: 15px;
+      font: 16px Arial, sans-serif;
+	  color: red;
+	  text-align: left;
+      background: gray;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 0 20px rgba(0,0,0,0.25);
+      border-radius: 20px;
+    }
+
+    .info h4 {
+      margin: 5px 0 5px;
+      color: black;
+		}
+		
+	.legend{
+      text-align:left;
+      line-height: 18px;
+      color: black;
+    }
+    .legend i {
+      width:20px;
+      height:18px;
+      float:left;
+      margin-right:5px;
+      opacity:0.8;
+    }
+	 .legend h4{
+      margin: 5px 0 5px;
+      color: black;
+		}
 </style>
 </head>
 <body>
@@ -44,9 +80,7 @@
           </tr>
           <tr>
             <td>
-            <table
- style="text-align: center; width: 100%; height: 158px;" border="0"
- cellpadding="5" cellspacing="0">
+            <table style="text-align: center; width: 100%; height: 158px;" border="0" cellpadding="5" cellspacing="0">
               <tbody>
                 <tr style="font-weight: bold; color: white;">
 					
@@ -94,25 +128,121 @@
       <br>
       <br>
       </td>
-      <td
- style="width: 511px; text-align: center; vertical-align: top;">
-      <table
- style="width: 90%; height: 948px; text-align: left; margin-left: auto; margin-right: auto;"
- border="0" cellpadding="2" cellspacing="2">
+      <td style="width: 511px; text-align: center; vertical-align: top;">
+      <table style="text-align: center; margin-left: auto; margin-right: auto; height: 948px; width: 90%;" border="0" cellpadding="2" cellspacing="2">
         <tbody>
           <tr>
-            <td style="height: 20%;"></td>
+            <td style="height: 10%;"><span style="color: rgb(0, 0, 153);"></span><big style="font-weight: bold; font-family: Arial;"><big><big><span style="color: rgb(0, 0, 153);">Structural Fires Reported in the Auckland Region <br> Between 2013-2016<br><br></span></big></big></big></td>
           </tr>
           <tr>
-            <td style="height: 80%;"></td>
-          </tr>
+            <td> 
+			      <div id="hexmap" style="width: 100%; height: 900px;"></div>
+        
+      <script type="text/javascript" src="../js/Hex_mesh.js"></script>   
+        
+    <script>
+      var mymap = L.map('hexmap').setView([-36.892484305134516, 174.832360900751553], 10);
+        
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; <a href="https://www.esri.com/en-us/home/">Esri</a> &mdash; Esri, DeLorme, NAVTEQ|&copy <a href="https://carto.com/attribution/">Carto</a> |Fire Incidence Data &copy <a href="https://onlineservices.fire.org.nz/">New Zealand Fire Service 2016</a>',
+	maxZoom: 16
+}).addTo(mymap);
+    
+        function getColor(d) {
+    return d > 100  ? '#fcffc4' :
+           d > 50  ? '#fbff8e' :
+           d > 25  ? '#fca40b' :
+           d > 15   ? '#dd5039' :
+           d > 5   ? '#932567' :
+           d > 0   ? '#420a68' :
+                      '#000000';
+        }
+   function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.FIRE_INCID),
+        weight: 0.5,
+        opacity: 1,
+        color: 'white',
+        fillOpacity: 0.7
+    };
+}
+        
+    var geojson;
+        
+     
+    function highlightFeature(e) {
+        var layer = e.target;
+
+        layer.setStyle({
+        weight: 4,
+        color: 'black',
+        fillOpacity: 1
+    });
+
+      if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+      }
+
+      info.update(layer.feature.properties);
+      } 
+	 function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+  }
+		function onEachFeature(feature, layer) {
+      layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+    });
+  }
+		
+geojson = L.geoJson(Hex_Mesh, {style: style, onEachFeature: onEachFeature}).addTo(mymap);
+    
+var info = L.control();
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+};
+		info.update = function (props) {
+    this._div.innerHTML = '<h4>Reported Number of Structural Fires</h4>' +  (props ?
+         props.FIRE_INCID + ' fires'
+        : 'Hover over a bin');
+};
+
+info.addTo(mymap);
+		
+		var legend=L.control({position:'bottomright'});
+		
+legend.onAdd = function(map){
+	
+  var div = L.DomUtil.create('div','info legend'),
+  grades = [0,1,6,16,26,51,101],
+  key_labels = ["0","1-5","6-15","16-25","26-50","51-100",">100"],
+  labels = ['<h4> Structural Fires 2013-2016 </h4>'],
+  from, to;
+  for (var i = 0; i < grades.length; i++) {
+    from = grades[i];
+    to = grades[i + 1];
+    labels.push(
+    '<i style="background:' + getColor(from) + '"></i> ' +
+       key_labels[i]);
+    }
+      div.innerHTML = labels.join('<br>');
+      return div;
+      };
+
+      legend.addTo(mymap);
+    </script>
+    
+			  </td>
+          </tr><tr style="color: black;"><td><table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2"><tbody><tr><td></td><td style="text-align: right;">Website created by Alfonso De Guzman</td></tr></tbody></table></td></tr>
         </tbody>
-      </table>
-      <br>
-      </td>
+      </table><div style="text-align: right;">
+      <br style="color: black;">
+      </div></td>
     </tr>
   </tbody>
 </table>
 <br style="color: white;">
-</body>
-</html>
+</body></html>
