@@ -35,7 +35,7 @@
 
   
 	
-  $.getJSON("Reserve_data_v2.json", function(data){
+  $.getJSON("https://adeg109.github.io/js/Reserve_data_v2.json", function(data){
         geoJsonObject = topojson.feature(data, data.objects.reserve)
         map.data.addGeoJson(geoJsonObject); 
       }); 
