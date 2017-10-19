@@ -1,4 +1,4 @@
-eqfeed_callback({
+{
 "type": "FeatureCollection",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::2193" } },
 "features": [
@@ -3448,5 +3448,6 @@ eqfeed_callback({
 { "type": "Feature", "properties": { "Overlays": "No", "NaPALIS_ID": 2802497, "Recorded_A": 953.8528, "Type": "CONSERVATION_AREA", "Start_Date": "1987\/01\/01", "Name": "Wharekopae Conservation Area" }, "geometry": { "type": "Point", "coordinates": [ 1992321.9914584956, 5720854.6406377582 ] } },
 { "type": "Feature", "properties": { "Overlays": "No", "NaPALIS_ID": 2802500, "Recorded_A": 400.5376, "Type": "CONSERVATION_AREA", "Start_Date": "1987\/01\/01", "Name": "Whitikau Conservation Area" }, "geometry": { "type": "Point", "coordinates": [ 2000596.0570028373, 5773380.5100191152 ] } },
 { "type": "Feature", "properties": { "Overlays": "No", "NaPALIS_ID": 2802503, "Recorded_A": 83.263, "Type": "CONSERVATION_AREA", "Start_Date": "1987\/01\/01", "Name": "Willowflat Conservation Area" }, "geometry": { "type": "Point", "coordinates": [ 1945593.4164052547, 5674771.3512782203 ] } }
-	});
+]
+}
 
