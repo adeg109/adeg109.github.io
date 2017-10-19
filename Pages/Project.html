@@ -21,18 +21,26 @@
   <body>
     <div id="map"></div>
     <script>
-
 	  var map, infoWindow;
-      function initMap() {
+      var geoJsonObject;
+      var thejson;
 
+   $(document).ready(function(){
+      function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 5,
           center: {lat: -40.9006, lng: 174.8860}
         });
-
 		   map.setMapTypeId('satellite');
-		  
-		  map.data.loadGeoJson('https://adeg109.github.io/js/Reserve_data_v2.json');
+
+  
+	
+  $.getJSON("Reserve_data_v2.json", function(data){
+        geoJsonObject = topojson.feature(data, data.objects.reserve)
+        map.data.addGeoJson(geoJsonObject); 
+      }); 
+       
+ });//end document ready
 		  
 		  infoWindow = new google.maps.InfoWindow;
 
