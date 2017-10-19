@@ -22,28 +22,18 @@
     <div id="map"></div>
     <script>
 	  var map, infoWindow;
-      var geoJsonObject;
-      var thejson;
-
-   $(document).ready(function(){
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 5,
           center: {lat: -40.9006, lng: 174.8860}
         });
 		   map.setMapTypeId('satellite');
+          
+          map.data.loadGeoJson('https://adeg109.github.io/js/Reserve_points.json');
 
-  
-	
-  $.getJSON("https://adeg109.github.io/js/Reserve_data_v2.json", function(data){
-        geoJsonObject = topojson.feature(data, data.objects.reserve)
-        map.data.addGeoJson(geoJsonObject); 
-      }); 
-       
- });//end document ready
+
 		  
 		  infoWindow = new google.maps.InfoWindow;
-
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
@@ -51,7 +41,6 @@
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
             infoWindow.open(map);
@@ -64,7 +53,6 @@
           handleLocationError(false, infoWindow, map.getCenter());
         }
       }
-
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
@@ -74,6 +62,19 @@
       }
 		  
 		  
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+        });
+        
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
