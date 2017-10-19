@@ -22,30 +22,61 @@
     <div id="map"></div>
     <script>
 		
-// Creating a new map
+
+		
+		var map;
 function initMap() {
-				window.onload = function(){
-					var latlng = new google.maps.LatLng(-40.9006, 174.8860);
-					var options = {
-					  zoom: 5,
-					  center: latlng,
-					  mapTypeId: google.maps.MapTypeId.ROADMAP
-					}; 
-					var map = new google.maps.Map(document.getElementById('map'), options);
-				}
-				
-			map.data.loadGeoJson('https://adeg109.github.io/js/Reserve_points.json');
-  
-	 var markers = features.map(function (feature) {
+
+    var styleArray = [
+        {
+            featureType: 'all',
+            stylers: [
+                { saturation: -80 }
+            ]
+        }, {
+            featureType: 'road.arterial',
+            elementType: 'geometry',
+            stylers: [
+                { hue: '#00ffee' },
+                { saturation: 50 }
+            ]
+        }, {
+            featureType: 'poi.business',
+            elementType: 'labels',
+            stylers: [
+                { visibility: 'off' }
+            ]
+        }
+    ];
+
+    var mapOptions = {
+        zoom: 5,
+        center: new google.maps.LatLng (-40.9006, 174.8860),
+        styles: styleArray
+    };
+
+    var map = new google.maps.Map(document.getElementById('map'),
+        mapOptions);
+
+
+
+    // Load GeoJSON.
+    //map.data.loadGeoJson('https://gist.githubusercontent.com/vgrem/4d6ff14d50f408e864f1ee4614653c1c/raw/schools.geojson');
+
+    map.data.loadGeoJson('https://adeg109.github.io/js/Reserve_points.json', null, function (features) {
+
+        var markers = features.map(function (feature) {
             var g = feature.getGeometry();
             var marker = new google.maps.Marker({ 'position': g.get(0) });
             return marker;
         });
-			};
-		
-		
-		
-		
+
+        
+    })
+
+
+}
+
      
     </script>
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
