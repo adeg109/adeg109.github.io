@@ -1,14 +1,45 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Marker Clustering</title>
-    <style>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUJNBXMW8dm_BSxfyePgjCAE0c2mwPACA&callback=initMap">
+    </script>
+  <title>Lab 5</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+<style type="text/css">
+
+  .button {
+  padding: 8px 60px 8px 60px;
+  font-size: 20px;
+  font-family: "times new roman";
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: rgb(0, 0, 48);
+  border: none;
+  border-radius: 15px;
+  box-shadow: none;
+}
+
+.button:hover {background-color: #0303a0}
+
+.button:active {
+  background-color: #0303a0;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
         height: 90%;
+		color: #fff;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -16,74 +47,162 @@
         margin: 0;
         padding: 0;
       }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
+ 
+
+</style>
+</head>
+<body>
+<table style="text-align: left; color: white; width: 100%;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="width: 15%; vertical-align: top; background-color: rgb(0, 0, 48);"><br>
+      <table style="text-align: left; width: 100%;" border="0"
+ cellpadding="2" cellspacing="20">
+        <tbody>
+          <tr>
+            <td><big style="font-weight: bold;"><big>GEOG
+774: Advanced Spatial Data Handling</big></big></td>
+          </tr>
+          <tr>
+            <td>
+            <table style="text-align: center; width: 100%; height: 158px;" border="0" cellpadding="5" cellspacing="0">
+              <tbody>
+                <tr style="font-weight: bold; color: white;">
+					
+                  <td style="height: 5%;"><a style="text-decoration: none; color: rgb(255, 255, 255);" href="../index.html"><big><button class="button">Home</button></big></a></td>
+                </tr>
+                <tr style="font-weight: bold;">
+                  <td style="height: 5%;"><a style="text-decoration: none; color: rgb(255, 255, 255);" href="Lab2.html"><big><button class="button">Lab 2</button></big></a></td>
+                </tr>
+                <tr style="font-weight: bold;">
+                  <td><a style="text-decoration: none; color: rgb(255, 255, 255);" href="Lab3.html"><big><button class="button">Lab 3</button></big></a></td>
+                </tr>
+                <tr style="font-weight: bold;">
+                  <td><a style="text-decoration: none; color: rgb(255, 255, 255);" href="Lab4.html"><big><button class="button">Lab 4</button></big></a></td>
+                </tr>
+                <tr style="font-weight: bold;">
+                  <td><a style="text-decoration: none; color: rgb(255, 255, 255);" href="Lab5.html"><big><button class="button">Lab 5</button></big></a></td>
+                </tr>
+                <tr style="font-weight: bold;">
+                  <td style="height: 10%;"><a style="text-decoration: none; color: rgb(255, 255, 255);" href="Project.html"><big><button class="button">Project</button></big></a></td>
+                </tr>
+              </tbody>
+            </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      </td>
+      <td style="width: 511px; text-align: center; vertical-align: top;">
+      <table style="text-align: center; margin-left: auto; margin-right: auto; height: 1100px; width: 90%;" border="0" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="height: 10%;"><span style="color: rgb(0, 0, 153);"></span><big style="font-weight: bold; font-family: Arial; font-size: 25px"><big><big><span style="color: rgb(0, 0, 153);">Conservation Lands and National Parks<br> in New Zealand<br><br></span></big></big></big></td>
+          </tr>
+          <tr>
+            <td> 
+			      
+				<div id="map"></div>
     <script>
-		
 
-		
-		var map;
-function initMap() {
+	  var map, infoWindow;
+      function initMap() {
 
-    var styleArray = [
-        {
-            featureType: 'all',
-            stylers: [
-                { saturation: -80 }
-            ]
-        }, {
-            featureType: 'road.arterial',
-            elementType: 'geometry',
-            stylers: [
-                { hue: '#00ffee' },
-                { saturation: 50 }
-            ]
-        }, {
-            featureType: 'poi.business',
-            elementType: 'labels',
-            stylers: [
-                { visibility: 'off' }
-            ]
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 5,
+          center: {lat: -40.9006, lng: 174.8860}
+        });
+
+		   map.setMapTypeId('satellite');
+		  
+		  map.data.loadGeoJson('Reserve_data.json');
+		  
+		  infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('<div style= "color: #000000;">Location found</div>');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
         }
-    ];
+      
 
-    var mapOptions = {
-        zoom: 5,
-        center: new google.maps.LatLng (-40.9006, 174.8860),
-        styles: styleArray
-    };
-
-    var map = new google.maps.Map(document.getElementById('map'),
-        mapOptions);
-
-
-
-    // Load GeoJSON.
-    //map.data.loadGeoJson('https://gist.githubusercontent.com/vgrem/4d6ff14d50f408e864f1ee4614653c1c/raw/schools.geojson');
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              '<div style= "color: #000000;">Error: The Geolocation service failed.</div>' :
+                              '<div style= "color: #000000;">Error: Your browser doesn\'t support geolocation.</div>');
+        infoWindow.open(map);
+      }
+		  
+	// Load GeoJSON.
+    //map.data.loadGeoJson('https://adeg109.github.io/js/Reserve_points.json');
 
     map.data.loadGeoJson('https://adeg109.github.io/js/Reserve_points.json', null, function (features) {
 
         var markers = features.map(function (feature) {
             var g = feature.getGeometry();
-            var marker = new google.maps.Marker({ 'position': g.get(0) });
+             var marker = new google.maps.Marker({ 
+				'position': g.get(0),
+				'icon': 'Tree.png'
+			});
             return marker;
         });
 
-        
-    })
+        var markerCluster = new MarkerClusterer(map, markers,{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
+    });
 
+    map.data.setStyle(function (feature) {
+        return { icon: feature.getProperty('icon'), visible: false };
+    });
 
 }
-
-     
+		 
+        
     </script>
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUJNBXMW8dm_BSxfyePgjCAE0c2mwPACA&callback=initMap">
-    </script>
-  </body>
-</html>
+			  </td>
+          </tr>
+        </tbody>
+      </table><div style="text-align: right;">
+      <br style="color: black;">
+      </div></td>
+    </tr>
+  </tbody>
+</table>
+<br style="color: white;">
+</body></html>
