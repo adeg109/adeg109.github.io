@@ -173,10 +173,10 @@
 
     map.data.loadGeoJson('https://adeg109.github.io/js/Reserve_points.json', null, function (features) {
 
-        var markers = features.map(function (feature) {
-            var g = feature.getGeometry();
-             var marker = new google.maps.Marker({ 
+        var g = feature.getGeometry();
+            var marker = new google.maps.Marker({ 
 				'position': g.get(0),
+				'title': feature.getProperty("Name") + ", " + "(" + feature.getProperty("Type") + ")",
 				'icon': 'Tree.png'
 			});
             return marker;
