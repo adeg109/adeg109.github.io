@@ -179,7 +179,7 @@
             var g = feature.getGeometry();
              var marker = new google.maps.Marker({ 
 				'position': g.get(0),
-				 'title': feature.getProperty("Name") + "," + "(" + feature.getProperty("Type") + ")",
+				 'title': feature.getProperty("Name"),
 				'icon': 'Tree.png'
 			});
             return marker;
