@@ -6,7 +6,7 @@
 	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUJNBXMW8dm_BSxfyePgjCAE0c2mwPACA&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQehN7rWePV6-4QpEaS4GDWI8G0MBUt_0&callback=initMap">
     </script>
   <title>Lab 5</title>
 	<meta charset="utf-8" />
@@ -35,11 +35,34 @@
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+	 #myButton {
+  padding: 8px 100px 8px 100px; 
+  font-size: 20px;
+  font-family: "times new roman";
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: rgb(0, 0, 48);
+  border: none;
+  border-radius: 15px;
+  box-shadow: none;
+}
+
+#myButton:hover {background-color: #0303a0}
+
+#myButton:active {
+  background-color: #0303a0;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+	
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
         height: 90%;
 		color: #fff;
+		margin: 10px 0 10px 0;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -47,7 +70,20 @@
         margin: 0;
         padding: 0;
       }
- 
+ #info {
+        position: relative;
+        text-align: left;
+        color: rgb(0, 0, 153);
+	 	font-family: Arial;
+	 	font-size: 15px;
+	 	margin: 25px 0 10px 0;
+	 	
+      }
+#source {
+        position: relative;
+        text-align: left;
+        color: black;
+      }
 
 </style>
 </head>
@@ -119,12 +155,14 @@
       <table style="text-align: center; margin-left: auto; margin-right: auto; height: 1100px; width: 90%;" border="0" cellpadding="2" cellspacing="2">
         <tbody>
           <tr>
-            <td style="height: 10%;"><span style="color: rgb(0, 0, 153);"></span><big style="font-weight: bold; font-family: Arial; font-size: 25px"><big><big><span style="color: rgb(0, 0, 153);">Conservation Lands and National Parks<br> in New Zealand<br><br></span></big></big></big></td>
+            <td style="height: 10%;"><big style="font-weight: bold; font-family: Arial"><big><big><span style="color: rgb(0, 0, 153);"><h2>Conservation Lands and National Parks<br> in New Zealand<br><br></h2></span></big></big></big></td>
           </tr>
           <tr>
             <td> 
-			      
+			     <div id=info> This is a map showing Conservation lands and National parks in New Zealand provided by the NZ Department of Conservation using <a href="https://developers.google.com/maps/">Google Maps API</a>. Markers are grouped into clusters that zoom in on click. Hover over points to check the name of the reserve and the button below the map will look for your location on the map. <br>Source:<a href="https://koordinates.com/layer/754-doc-public-conservation-areas/">DOC Public Conservation Areas</a><br> ***If the map does not load, use Google Chrome and refresh (or press F5)***</div>
 				<div id="map"></div>
+				<button id= "myButton"> Locate me</button>
+                <div id="source"><h3>Created by Alfonso De Guzman</h3></div>
     <script>
 
       var map, infoWindow;
@@ -137,12 +175,13 @@
 
 		   map.setMapTypeId('satellite');
 		  
-		  map.data.loadGeoJson('Reserve_data.json');
 		  
 		  infoWindow = new google.maps.InfoWindow;
 
+		  
         // Try HTML5 geolocation.
-        if (navigator.geolocation) {
+      
+		  document.getElementById("myButton").onclick= function () {if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
@@ -160,15 +199,14 @@
           // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
         }
-      
-
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
                               '<div style= "color: #000000;">Error: The Geolocation service failed.</div>' :
                               '<div style= "color: #000000;">Error: Your browser doesn\'t support geolocation.</div>');
         infoWindow.open(map);
       }
+							  }
 		  
 	// Load GeoJSON.
     //map.data.loadGeoJson('https://adeg109.github.io/js/Reserve_points.json');
