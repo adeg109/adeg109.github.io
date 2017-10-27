@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
   <meta content="text/html; charset=ISO-8859-1"
@@ -223,7 +223,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
             return marker;
         });
 
-        var markerCluster = new MarkerClusterer(map, markers,{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     });
 
     map.data.setStyle(function (feature) {
